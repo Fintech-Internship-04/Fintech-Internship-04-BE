@@ -10,8 +10,5 @@ import java.util.*;
 @Mapper
 @Repository
 public interface UserMapper {
-
-
     public HashMap<String,Object> getUserInfo();
-
 }

@@ -8,14 +8,9 @@ import java.util.HashMap;
 
 @Service
 public class UserService {
-
     @Autowired
     UserMapper userMapper;
-
-
     public HashMap<String, Object> getUserInfo() {
         return userMapper.getUserInfo();
-
     }
-
 }

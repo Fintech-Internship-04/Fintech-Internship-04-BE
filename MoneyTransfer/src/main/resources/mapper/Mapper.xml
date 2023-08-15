@@ -6,6 +6,4 @@
     <select id="getUserInfo" resultType="HashMap">
         SELECT * FROM User;
     </select>
-
-
 </mapper>
