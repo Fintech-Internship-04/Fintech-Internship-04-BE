@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,7 +23,7 @@ public class UserController {
     UserService userService;
     //그룹에 인원 추가
     @GetMapping("/getUserInfo")
-    public HashMap<String, Object> getUserInfo(){
+    public List<HashMap<String, Object>> getUserInfo(){
         return  userService.getUserInfo();
     }
 
