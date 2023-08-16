@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.moneytransfer.mapper.UserMapper">
-    <select id="getUserInfo" resultType="HashMap">
-        SELECT * FROM TB_USER;
+    <select id="getUserInfo" resultType="com.example.moneytransfer.model.User">
+        SELECT * FROM TB_USER WHERE user_code = #{user_code};
     </select>
 </mapper>

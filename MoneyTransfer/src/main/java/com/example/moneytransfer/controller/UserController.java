@@ -1,8 +1,8 @@
 package com.example.moneytransfer.controller;
 
 
+
 import com.example.moneytransfer.model.User;
-import com.example.moneytransfer.mapper.UserMapper;
 import com.example.moneytransfer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,9 @@ public class UserController {
     @Autowired
     UserService userService;
     //그룹에 인원 추가
-    @GetMapping("/getUserInfo")
-    public List<HashMap<String, Object>> getUserInfo(){
-        return  userService.getUserInfo();
+    @GetMapping("/getUserInfo/{user_code}")
+    public User getUserInfo(@PathVariable int user_code){
+        return  userService.getUserInfo(user_code);
     }
 
 }

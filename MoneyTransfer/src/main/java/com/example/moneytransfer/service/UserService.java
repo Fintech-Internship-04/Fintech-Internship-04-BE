@@ -1,5 +1,6 @@
 package com.example.moneytransfer.service;
 import com.example.moneytransfer.mapper.UserMapper;
+import com.example.moneytransfer.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 public class UserService {
     @Autowired
     UserMapper userMapper;
-    public List<HashMap<String, Object>> getUserInfo() {
-        return userMapper.getUserInfo();
+    public User getUserInfo(int user_code) {
+        return userMapper.getUserInfo(user_code);
     }
 }
