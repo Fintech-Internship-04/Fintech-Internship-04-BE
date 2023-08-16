@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.moneytransfer.mapper.GroupMapper">
+
+    <insert id="createGroup" useGeneratedKeys="true"
+            keyProperty="group_request.group_code"
+            parameterType = "com.example.moneytransfer.dto.GroupCreateDTO">
+        INSERT INTO TB_GROUP
+        (name)
+        VALUES (
+        #{group_request.group_name}
+        );
+
+    </insert>
+
+
+    <insert id="addMembers" parameterType = "java.util.List">
+
+        INSERT INTO TB_USER_has_TB_GROUP
+        (TB_USER_user_code,TB_GROUP_group_code)
+        VALUES
+
+        <foreach collection="user_list" item="item" separator=",">
+            (#{item.user_code}, #{group_code})
+        </foreach>
+    </insert>
+
+</mapper>
