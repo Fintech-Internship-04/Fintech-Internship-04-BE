@@ -1,10 +1,8 @@
 package com.example.moneytransfer.service;
+import com.example.moneytransfer.dto.Group;
 import com.example.moneytransfer.dto.GroupAddDTO;
 import com.example.moneytransfer.dto.GroupCreateDTO;
 import com.example.moneytransfer.mapper.GroupMapper;
-import com.example.moneytransfer.mapper.UserMapper;
-import com.example.moneytransfer.model.User;
-import org.apache.catalina.mbeans.GroupMBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -24,8 +22,8 @@ public class GroupService {
         groupMapper.addMembers(group_code, userList);
     }
 
-    public Integer getMaxGroupCode(){
-        return groupMapper.getMaxGroupCode();
+    public List<Group> getGroupList(Integer user_code){
+        return groupMapper.getGroupList(user_code);
     }
 
 

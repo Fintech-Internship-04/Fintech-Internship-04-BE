@@ -1,4 +1,4 @@
-package com.example.moneytransfer.model;
+package com.example.moneytransfer.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,5 +16,4 @@ public class Group {
 
     private int group_code;
     private String name;
-
 }

@@ -1,12 +1,8 @@
 package com.example.moneytransfer.service;
 import com.example.moneytransfer.mapper.UserMapper;
-import com.example.moneytransfer.model.User;
+import com.example.moneytransfer.dto.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.List;
 
 @Service
 public class UserService {

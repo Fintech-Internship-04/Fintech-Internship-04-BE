@@ -1,12 +1,10 @@
 package com.example.moneytransfer.mapper;
 
 
-import com.example.moneytransfer.model.User;
+import com.example.moneytransfer.dto.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-
-import java.util.*;
 
 @Mapper
 @Repository

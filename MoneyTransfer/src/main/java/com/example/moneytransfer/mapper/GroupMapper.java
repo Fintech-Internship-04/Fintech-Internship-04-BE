@@ -1,9 +1,9 @@
 package com.example.moneytransfer.mapper;
 
 
+import com.example.moneytransfer.dto.Group;
 import com.example.moneytransfer.dto.GroupAddDTO;
 import com.example.moneytransfer.dto.GroupCreateDTO;
-import com.example.moneytransfer.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -25,7 +25,7 @@ public interface GroupMapper {
     public void deleteMembers(@Param("delete_list") List<Integer> deleteUserList);
 
 
-    public Integer getMaxGroupCode();
+    public List<Group> getGroupList(Integer user_code);
     //모임 이름 수정
     public void editGroupName(@Param("group_name") String name);
 

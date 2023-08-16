@@ -2,14 +2,11 @@ package com.example.moneytransfer.controller;
 
 
 
-import com.example.moneytransfer.model.User;
+import com.example.moneytransfer.dto.User;
 import com.example.moneytransfer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

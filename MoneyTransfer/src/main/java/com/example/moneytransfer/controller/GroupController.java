@@ -1,10 +1,9 @@
 package com.example.moneytransfer.controller;
 
 
+import com.example.moneytransfer.dto.Group;
 import com.example.moneytransfer.dto.GroupAddDTO;
 import com.example.moneytransfer.dto.GroupCreateDTO;
-import com.example.moneytransfer.model.Group;
-import com.example.moneytransfer.model.User;
 import com.example.moneytransfer.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +41,13 @@ public class GroupController {
 
         groupService.addMembers(group_code,userList);
 
+    }
+
+    @PostMapping("/getGroupList/{user_code}")
+    public List<Group> getGroupList(@PathVariable Integer user_code)
+    {
+
+        return groupService.getGroupList(user_code);
     }
 
 

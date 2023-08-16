@@ -1,4 +1,4 @@
-package com.example.moneytransfer.model;
+package com.example.moneytransfer.dto;
 
 import lombok.*;
 
