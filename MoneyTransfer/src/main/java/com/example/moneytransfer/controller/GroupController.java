@@ -18,38 +18,55 @@ public class GroupController {
 
 
     @PostMapping("/createGroup")
-    public void createGroup(@RequestBody Map<String,Object> request ){
-        System.out.println(request);
+    public boolean createGroup(@RequestBody Map<String, Object> request) {
 
-        GroupCreateDTO groupRequest = new GroupCreateDTO();
+       try{
+           System.out.println(request);
 
-        groupRequest.setUser_code((Integer)request.get("user_code"));
-        groupRequest.setGroup_name((String)request.get("group_name"));
+           GroupCreateDTO groupRequest = new GroupCreateDTO();
 
-        List<GroupAddDTO> userList = (List<GroupAddDTO>)request.get("user_list");
+           groupRequest.setUser_code((Integer) request.get("user_code"));
+           groupRequest.setGroup_name((String) request.get("group_name"));
 
-
-
-        System.out.println(groupRequest);
-        System.out.println(userList);
+           List<GroupAddDTO> userList = (List<GroupAddDTO>) request.get("user_list");
 
 
-        groupService.createGroup(groupRequest);
-        Integer group_code = groupRequest.getGroup_code();
+           System.out.println(groupRequest);
+           System.out.println(userList);
 
-        System.out.println(group_code);
 
-        groupService.addMembers(group_code,userList);
+           groupService.createGroup(groupRequest);
+           Integer group_code = groupRequest.getGroup_code();
 
+           System.out.println(group_code);
+
+           groupService.addMembers(group_code, userList);
+       }catch(Exception e)
+       {
+           return false;
+       }
+
+        return true;
     }
 
-    @PostMapping("/getGroupList/{user_code}")
-    public List<Group> getGroupList(@PathVariable Integer user_code)
-    {
+    @GetMapping("/getGroupList/{user_code}")
+    public List<Group> getGroupList(@PathVariable Integer user_code) {
 
         return groupService.getGroupList(user_code);
     }
 
+    @PostMapping("/leaveGroup")
+    public boolean leaveGroup(@RequestParam Integer user_code,
+                           @RequestParam Integer group_code)
+    {
+        try{
+            groupService.leaveGroup(user_code,group_code);
+        }catch(Exception e){
+            return false;
+        }
 
+        return true;
+
+    }
 
 }

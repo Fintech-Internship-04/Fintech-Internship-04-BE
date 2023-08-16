@@ -8,7 +8,7 @@
             keyProperty="group_request.group_code"
             parameterType = "com.example.moneytransfer.dto.GroupCreateDTO">
         INSERT INTO TB_GROUP
-        (name)
+        (group_name)
         VALUES (
         #{group_request.group_name}
         );
@@ -19,7 +19,7 @@
     <insert id="addMembers" parameterType = "java.util.List">
 
         INSERT INTO TB_USER_has_TB_GROUP
-        (TB_USER_user_code,TB_GROUP_group_code)
+        (user_code,group_code)
         VALUES
 
         <foreach collection="user_list" item="item" separator=",">
@@ -28,11 +28,21 @@
     </insert>
 
 
-
+    <update id="editGroupName" parameterType="int">
+        UPDATE TB_GROUP SET group_name = #{group_name} WHERE user_code = #{user_code}
+        AND group_code = #{group_code}
+    </update>
 
     <select id="getGroupList" resultType="com.example.moneytransfer.dto.Group">
-        SELECT * FROM TB_GROUP WHERE user_code = #{user_code};
+        SELECT group_code, group_name FROM
+        TB_GROUP WHERE group_code in
+        (SELECT group_code AS group_code FROM TB_USER_has_TB_GROUP
+                 WHERE user_code = #{user_code})
     </select>
 
+    <delete id="leaveGroup">
 
+        DELETE FROM TB_USER_has_TB_GROUP WHERE user_code = #{user_code} AND
+                                               group_code = #{group_code}
+    </delete>
 </mapper>

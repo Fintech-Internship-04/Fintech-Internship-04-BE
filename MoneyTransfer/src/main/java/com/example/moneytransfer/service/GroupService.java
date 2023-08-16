@@ -3,6 +3,7 @@ import com.example.moneytransfer.dto.Group;
 import com.example.moneytransfer.dto.GroupAddDTO;
 import com.example.moneytransfer.dto.GroupCreateDTO;
 import com.example.moneytransfer.mapper.GroupMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
@@ -24,6 +25,13 @@ public class GroupService {
 
     public List<Group> getGroupList(Integer user_code){
         return groupMapper.getGroupList(user_code);
+    }
+
+
+    public void leaveGroup(Integer user_code,
+                            Integer group_code)
+    {
+        groupMapper.leaveGroup(user_code,group_code);
     }
 
 

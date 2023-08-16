@@ -15,5 +15,5 @@ public class Group {
 
 
     private int group_code;
-    private String name;
+    private String group_name;
 }
