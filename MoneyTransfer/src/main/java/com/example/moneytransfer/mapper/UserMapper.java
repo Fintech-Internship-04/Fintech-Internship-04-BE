@@ -12,4 +12,6 @@ import java.util.*;
 @Repository
 public interface UserMapper {
     public User getUserInfo(@Param("user_code") int userCode);
+
+    public void signUp(@Param("user") User user);
 }

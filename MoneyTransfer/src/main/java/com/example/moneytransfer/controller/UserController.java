@@ -27,4 +27,12 @@ public class UserController {
         return  userService.getUserInfo(user_code);
     }
 
+    @PostMapping("/signup")
+    public void signUp(@RequestBody User user)
+    {
+        userService.signUp(user);
+    }
+
+
+
 }

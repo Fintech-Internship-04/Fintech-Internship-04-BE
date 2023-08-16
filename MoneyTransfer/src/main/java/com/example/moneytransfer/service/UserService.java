@@ -15,4 +15,9 @@ public class UserService {
     public User getUserInfo(int user_code) {
         return userMapper.getUserInfo(user_code);
     }
+
+    public void signUp(User user){
+
+        userMapper.signUp(user);
+    }
 }

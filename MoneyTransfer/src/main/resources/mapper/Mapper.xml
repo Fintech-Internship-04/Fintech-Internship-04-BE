@@ -6,4 +6,16 @@
     <select id="getUserInfo" resultType="com.example.moneytransfer.model.User">
         SELECT * FROM TB_USER WHERE user_code = #{user_code};
     </select>
+
+
+    <insert id="signUp" parameterType = "com.example.moneytransfer.model.User" useGeneratedKeys="true" keyProperty="user_code">
+        INSERT INTO TB_USER
+        (id,password,phone_num)
+        VALUES (
+                #{user.id},
+                #{user.password},
+                #{user.phone_num}
+            )
+
+    </insert>
 </mapper>
