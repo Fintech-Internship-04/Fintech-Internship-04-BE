@@ -27,9 +27,14 @@
     </select>
 
     <select id ="login" resultType ="int">
-
         SELECT user_code FROM TB_USER WHERE id = #{id} AND password = #{password}
     </select>
+
+    <select id ="getAccountList" resultType ="com.example.moneytransfer.dto.AccountDTO">
+        SELECT * FROM TB_ACCOUNT WHERE user_code = #{user_code}
+    </select>
+
+
 
 </mapper>
 

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.moneytransfer.mapper.AccountMapper">
+    <update id="deposit" >
+        UPDATE TB_ACCOUNT SET balance_amt = balance_amt - #{payment_detail.tran_amt} WHERE
+            account_num = #{payment_detail.account_num} and
+            balance_amt >= #{payment_detail.tran_amt}
+
+    </update>
+
+    <select id="getBalance">
+        SELECT balance_amt FROM account
+        WHERE account_num = #{account_num}
+    </select>
+
+    <insert id = "createPaymentDetail" useGeneratedKeys="true"
+            keyProperty="group_request.group_code" parameterType="com.example.moneytransfer.dto.AccountPaymentDTO">
+        INSERT INTO TB_PAYMENT_DETAILS
+            (tran_dtm,balance_amt,tran_amt, is_taken, payment_dest,
+             account_num,user_code,group_code)
+
+        VALUES (NOW(),#{payment_detail.balance_amt},#{payment_detail.tran_amt},#{payment_detail.is_taken},
+                #{payment_detail.payment_dest},#{payment_detail.account_num},#{payment_detail.user_code},
+                #{payment_detail.group_code}
+                )
+
+    </insert>
+
+    <select id ="getAccountList" resultType ="com.example.moneytransfer.dto.AccountDTO">
+        SELECT * FROM TB_ACCOUNT WHERE user_code = #{user_code}
+    </select>
+
+    <select id ="getTransferHistory" resultType ="com.example.moneytransfer.dto.AccountDTO">
+        SELECT * FROM TB_PAYMENT_DETAILS WHERE user_code = #{user_code}
+    </select>
+
+
+</mapper>

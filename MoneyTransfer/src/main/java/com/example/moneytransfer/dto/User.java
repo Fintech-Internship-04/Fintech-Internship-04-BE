@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 public class User {
     private int user_code;
 
-
     private String Id;
 
     private String password;

@@ -1,6 +1,7 @@
 package com.example.moneytransfer.mapper;
 
 
+import com.example.moneytransfer.dto.AccountDTO;
 import com.example.moneytransfer.dto.User;
 import com.example.moneytransfer.dto.UserListDTO;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,4 +21,7 @@ public interface UserMapper {
                          @Param("password") String password);
 
     public List<UserListDTO> getUserList();
+
+    public List<AccountDTO> getAccountList(@Param("user_code")
+                                           int user_code);
 }
