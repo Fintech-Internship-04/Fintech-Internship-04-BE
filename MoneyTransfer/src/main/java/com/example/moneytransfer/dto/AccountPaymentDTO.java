@@ -12,18 +12,26 @@ import lombok.Setter;
 public class AccountPaymentDTO {
 
 
-    private int bank_tran_id;
+    private Integer bank_tran_id;
 
-    private int balance_amt;
+    private Integer balance_amt;
+
+    private Integer tran_amt;
 
     private boolean is_taken;
 
     private String payment_dest;
 
-    private int account_code;
+    private Integer to_account_code;
 
-    private int user_code;
+    private Integer user_code;
 
-    private int group_code;
+    private Integer group_code;
+
+    private String account_num;
+
+    private Integer account_code;
+
+    private Integer to_user_code;
 
 }

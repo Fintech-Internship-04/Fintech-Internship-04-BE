@@ -34,6 +34,9 @@
         SELECT * FROM TB_ACCOUNT WHERE user_code = #{user_code}
     </select>
 
+    <select id ="getIdByCode" resultType ="int">
+        SELECT id FROM TB_USER WHERE user_code = #{user_code}
+    </select>
 
 
 </mapper>

@@ -22,31 +22,37 @@ public class AccountController {
 
 
     @PostMapping("/deposit")
-    public ResponseEntity<Void> deposit(@RequestBody AccountPaymentDTO payment_detail)
+    public boolean deposit(@RequestBody AccountPaymentDTO payment_detail)
     {
-
         try{
-            accountService.deposit(payment_detail);
-
+            return accountService.deposit(payment_detail);
         }catch(Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            e.printStackTrace();
+            return false;
         }
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
     @GetMapping("/getAccountList/{user_code}")
-    public List<AccountDTO> getAccountList(@PathVariable int user_code)
+    public List<AccountDTO> getAccountList(@PathVariable Integer user_code)
     {
         return accountService.getAccountList(user_code);
     }
-    @GetMapping("/getTransferHistory/{user_code}")
-    public List<AccountDTO> getTransferHistory(@PathVariable int user_code
+    @GetMapping("/getTransferHistory/{account_code}")
+    public List<AccountPaymentDTO> getTransferHistory(@PathVariable int account_code
     )
     {
-        return accountService.getAccountList(user_code);
+        return accountService.getTransferHistory(account_code);
     }
 
+
+
+    @GetMapping("/getNonCalculateMemberList/{group_code}")
+    public List<AccountPaymentDTO> getNonCalculateMemberList(@PathVariable int group_code
+    )
+    {
+        return accountService.getTransferHistory(group_code);
+    }
 
 
 }

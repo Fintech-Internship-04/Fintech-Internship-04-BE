@@ -6,6 +6,7 @@ import com.example.moneytransfer.mapper.GroupMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,18 +17,67 @@ public class AccountService {
     AccountMapper accountMapper;
 
 
-    public void deposit(AccountPaymentDTO payment_detail)
+    @Transactional
+    public boolean deposit(AccountPaymentDTO payment_detail)
     {
-        accountMapper.deposit(payment_detail);
-        int balance = accountMapper.getBalance(String.valueOf(payment_detail.getAccount_num()));
-        payment_detail.setBalance_amt(balance);
-        accountMapper.createPaymentDetail(payment_detail);
+       
+        int balance = accountMapper.getBalance(payment_detail.getAccount_code());
+        payment_detail.setTran_amt(-payment_detail.getTran_amt());
+        System.out.println(payment_detail.getTran_amt());
+        System.out.println(balance);
+
+        //출금하려는 계좌의 잔액이 출금액보다 더 큰 경우에
+        if(balance+payment_detail.getTran_amt()>0){
+            //출금
+            payment_detail.set_taken(true);
+            accountMapper.deposit(payment_detail);
+            int from_account_code = payment_detail.getAccount_code();
+            int to_account_code = payment_detail.getTo_account_code();
+            int tran_amt = payment_detail.getTran_amt();
+
+            //출금내역 입력
+            accountMapper.createPaymentDetail(payment_detail);
+
+            //입금
+            accountMapper.deposit(payment_detail);
+            if(payment_detail.getTo_user_code()!=null)
+            {
+                payment_detail.setAccount_code(to_account_code);
+                payment_detail.setTo_account_code(from_account_code);
+                payment_detail.setTran_amt(-payment_detail.getTran_amt());
+                payment_detail.setPayment_dest(accountMapper.getUserId(payment_detail.getTo_user_code()));
+                //입금내역 입력
+                accountMapper.createPaymentDetail(payment_detail);
+            }
+
+
+            return true;
+
+        }
+        //출금 실패시
+        else{
+            //출금을 실패한 게 모임 정산이었을 경우
+            if(payment_detail.getGroup_code()!=null)
+            {
+                //거래내역에 실패한 모임 정산을 기록한다.
+                payment_detail.set_taken(false);
+                accountMapper.createPaymentDetail(payment_detail);
+            }
+            return false;
+        }
+
+
+        //출금한 쪽의 결제내역 insert
     }
 
 
-
-    public List<AccountDTO> getAccountList(int user_code)
+    public List<AccountDTO> getAccountList(Integer user_code)
     {
         return accountMapper.getAccountList(user_code);
+    }
+
+    public List<AccountPaymentDTO> getTransferHistory(int account_code)
+    {
+        return accountMapper.getTransferHistory(account_code);
     }
 }
