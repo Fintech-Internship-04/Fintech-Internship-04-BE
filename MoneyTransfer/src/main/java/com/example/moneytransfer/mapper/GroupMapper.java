@@ -30,7 +30,7 @@ public interface GroupMapper {
     public void leaveGroup(@Param("user_code") Integer user_code,
                            @Param("group_code") Integer group_code);
     //모임 이름 수정
-    public void editGroupName(@Param("group_name") String name);
+    public void editGroupName(@Param("group_code") int group_code, @Param("group_name") String name);
 
     public int getGroupCode(@Param("group_name") String name);
 

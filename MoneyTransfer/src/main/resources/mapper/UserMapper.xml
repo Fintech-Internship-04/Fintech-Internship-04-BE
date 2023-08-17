@@ -10,14 +10,27 @@
 
     <insert id="signUp" parameterType = "com.example.moneytransfer.dto.User" useGeneratedKeys="true" keyProperty="user_code">
         INSERT INTO TB_USER
-        (id,password,phone_num)
+        (id,password,phone_num, createdAt, updatedAt)
         VALUES (
                 #{user.id},
                 #{user.password},
-                #{user.phone_num}
+                #{user.phone_num},
+                NOW(),
+                NOW()
             )
 
     </insert>
+
+    <select id="getUserList" resultType="com.example.moneytransfer.dto.UserListDTO">
+        SELECT user_code, id FROM
+            TB_USER;
+    </select>
+
+    <select id ="login" resultType ="int">
+
+        SELECT user_code FROM TB_USER WHERE id = #{id} AND password = #{password}
+    </select>
+
 </mapper>
 
 

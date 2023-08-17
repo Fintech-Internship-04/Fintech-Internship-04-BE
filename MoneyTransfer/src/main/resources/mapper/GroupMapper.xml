@@ -28,9 +28,9 @@
     </insert>
 
 
-    <update id="editGroupName" parameterType="int">
-        UPDATE TB_GROUP SET group_name = #{group_name} WHERE user_code = #{user_code}
-        AND group_code = #{group_code}
+    <update id="editGroupName" >
+        UPDATE TB_GROUP SET group_name = #{group_name} WHERE
+        group_code = #{group_code}
     </update>
 
     <select id="getGroupList" resultType="com.example.moneytransfer.dto.Group">

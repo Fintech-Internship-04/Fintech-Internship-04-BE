@@ -34,5 +34,9 @@ public class GroupService {
         groupMapper.leaveGroup(user_code,group_code);
     }
 
+    public void editGroupName(int group_code, String name){
+        groupMapper.editGroupName(group_code, name);
+    }
+
 
 }

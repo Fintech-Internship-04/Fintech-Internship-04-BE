@@ -49,6 +49,26 @@ public class GroupController {
         return true;
     }
 
+
+    @PostMapping("/addMembers")
+    public boolean addMembers(@RequestBody Map<String, Object> request) {
+
+        try{
+            System.out.println(request);
+
+            Integer group_code = (Integer)request.get("group_code");
+
+
+            List<GroupAddDTO> userList = (List<GroupAddDTO>) request.get("user_list");
+
+            groupService.addMembers(group_code, userList);
+        }catch(Exception e)
+        {
+            return false;
+        }
+
+        return true;
+    }
     @GetMapping("/getGroupList/{user_code}")
     public List<Group> getGroupList(@PathVariable Integer user_code) {
 
@@ -67,6 +87,13 @@ public class GroupController {
 
         return true;
 
+    }
+
+    @PostMapping("editGroupName/{group_code}/{group_name}")
+    public void editGroupName(@PathVariable int group_code,
+                              @PathVariable String group_name){
+
+        groupService.editGroupName(group_code,group_name);
     }
 
 }
