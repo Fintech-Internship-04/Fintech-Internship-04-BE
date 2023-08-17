@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.moneytransfer.mapper.AccountMapper">
+    <update id="deposit" parameterType="int">
+        UPDATE TB_ACCOUNT SET balance_amt = #{div_money} WHERE user_code = #{user_code}
+        <!--
+        TB_ACCOUNT 계좌의 balance_amt(잔액)
+        div_money(비결제자가 결제자에게 송금해야되는 금액)를 새로 생성해줄 예정
+        -->
+    </update>
+    <select id="getIntegrateAccount" resultType="com.example.moneytransfer.dto.Account">
+    <!--쿼리의 고유 식별자인 getIntegrateAccount를 정의하고, 맵핑되는 객체 타입이 com~.dto.Account임-->
+        SELECT T FROM
+        ACCOUNT WHERE
+    </select>
+
+</mapper>
