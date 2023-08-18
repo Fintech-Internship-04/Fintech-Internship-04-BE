@@ -3,6 +3,7 @@ import com.example.moneytransfer.dto.AccountDTO;
 import com.example.moneytransfer.dto.UserListDTO;
 import com.example.moneytransfer.mapper.UserMapper;
 import com.example.moneytransfer.dto.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,4 +35,9 @@ public class UserService {
         return userMapper.getIdByCode(user_code);
     }
 
+
+
+    public void editUserInfo(User user){
+         userMapper.editUserInfo(user);
+    }
 }

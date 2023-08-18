@@ -45,6 +45,7 @@ public class GroupController {
            groupService.addMembers(group_code, userList);
        }catch(Exception e)
        {
+           e.printStackTrace();
            return false;
        }
 

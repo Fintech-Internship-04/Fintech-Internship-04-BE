@@ -38,6 +38,12 @@
         SELECT id FROM TB_USER WHERE user_code = #{user_code}
     </select>
 
+    <update id = "editUserInfo" parameterType="com.example.moneytransfer.dto.User">
+
+        UPDATE TB_USER SET id = #{user.id}, password = #{user.password}
+        WHERE user_code = #{user.user_code}
+    </update>
+
 
 </mapper>
 

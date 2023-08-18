@@ -57,6 +57,18 @@ public class UserController {
         return userService.getIdByCode(user_code);
     }
 
+    @PostMapping("/editUserInfo")
+    public boolean editUserInfo(@RequestBody User user)
+    {
+        try{
+            userService.editUserInfo(user);
+            return true;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
 
+    }
 
 }

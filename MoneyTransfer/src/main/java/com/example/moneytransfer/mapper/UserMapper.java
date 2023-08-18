@@ -26,4 +26,6 @@ public interface UserMapper {
                                            int user_code);
 
     public String getIdByCode(@Param("user_code") int user_code);
+
+    public void editUserInfo(@Param("user") User user);
 }
