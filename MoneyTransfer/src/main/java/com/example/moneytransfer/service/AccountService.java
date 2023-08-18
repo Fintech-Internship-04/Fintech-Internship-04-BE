@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AccountService {
@@ -70,14 +71,28 @@ public class AccountService {
         //출금한 쪽의 결제내역 insert
     }
 
-
+    public int getBalance(Integer account_code)
+    {
+        return accountMapper.getBalance(account_code);
+    }
     public List<AccountDTO> getAccountList(Integer user_code)
     {
         return accountMapper.getAccountList(user_code);
     }
 
-    public List<AccountPaymentDTO> getTransferHistory(int account_code)
+    public List<AccountDTO> getTransferHistory(int account_code)
     {
         return accountMapper.getTransferHistory(account_code);
     }
+
+    public List<Map<String,Object>> getNonCalculateMemberList(int group_code){
+        return accountMapper.getNonCalculateMemberList(group_code);
+    }
+
+    public String getAccountNum(int account_code)
+    {
+        return accountMapper.getAccountNum(account_code);
+    }
+
+
 }
