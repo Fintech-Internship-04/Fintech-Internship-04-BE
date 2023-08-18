@@ -34,7 +34,7 @@
         SELECT * FROM TB_ACCOUNT WHERE user_code = #{user_code}
     </select>
 
-    <select id ="getIdByCode" resultType ="int">
+    <select id ="getIdByCode" resultType ="String">
         SELECT id FROM TB_USER WHERE user_code = #{user_code}
     </select>
 

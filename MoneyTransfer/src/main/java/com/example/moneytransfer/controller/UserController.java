@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @GetMapping("/getIdByCode/{user_code}")
-    public int getIdByCode(@PathVariable int user_code)
+    public String getIdByCode(@PathVariable int user_code)
     {
         return userService.getIdByCode(user_code);
     }

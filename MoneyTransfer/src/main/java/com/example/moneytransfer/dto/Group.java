@@ -16,4 +16,5 @@ public class Group {
 
     private int group_code;
     private String group_name;
+    private int headcount;
 }

@@ -34,5 +34,9 @@ public interface GroupMapper {
 
     public int getGroupCode(@Param("group_name") String name);
 
+    public int getGroupHeadCount(@Param("group_code") Integer group_code);
+
+    public void deleteGroup(@Param("group_code") Integer group_code);
+
 
 }

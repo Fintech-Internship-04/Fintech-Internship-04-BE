@@ -32,6 +32,11 @@ public class GroupService {
                             Integer group_code)
     {
         groupMapper.leaveGroup(user_code,group_code);
+        if(groupMapper.getGroupHeadCount(group_code)==0)
+        {
+            groupMapper.deleteGroup(group_code);
+        }
+
     }
 
     public void editGroupName(int group_code, String name){

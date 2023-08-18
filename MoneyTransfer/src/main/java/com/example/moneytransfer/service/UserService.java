@@ -30,7 +30,7 @@ public class UserService {
         return userMapper.getUserList();
     }
 
-    public int getIdByCode(int user_code){
+    public String getIdByCode(int user_code){
         return userMapper.getIdByCode(user_code);
     }
 

@@ -14,4 +14,5 @@ public class GroupCreateDTO {
     private int group_code;
     private int user_code;
     private String group_name;
+    private int headcount;
 }

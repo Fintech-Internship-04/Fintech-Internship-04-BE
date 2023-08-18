@@ -8,9 +8,10 @@
             keyProperty="group_request.group_code"
             parameterType = "com.example.moneytransfer.dto.GroupCreateDTO">
         INSERT INTO TB_GROUP
-        (group_name)
+        (group_name,headcount)
         VALUES (
-        #{group_request.group_name}
+        #{group_request.group_name},
+        #{group_request.headcount}
         );
 
     </insert>
@@ -44,5 +45,15 @@
 
         DELETE FROM TB_USER_has_TB_GROUP WHERE user_code = #{user_code} AND
                                                group_code = #{group_code}
+    </delete>
+
+    <select id="getGroupHeadCount" resultType="int">
+
+        SELECT COUNT(user_code) FROM TB_USER_has_TB_GROUP
+        WHERE group_code = #{group_code}
+    </select>
+
+    <delete id="deleteGroup">
+        DELETE FROM TB_GROUP WHERE group_code = #{group_code}
     </delete>
 </mapper>

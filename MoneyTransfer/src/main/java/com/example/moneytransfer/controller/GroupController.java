@@ -27,6 +27,8 @@ public class GroupController {
 
            groupRequest.setUser_code((Integer) request.get("user_code"));
            groupRequest.setGroup_name((String) request.get("group_name"));
+           groupRequest.setHeadcount((Integer) request.get("headcount"));
+
 
            List<GroupAddDTO> userList = (List<GroupAddDTO>) request.get("user_list");
 

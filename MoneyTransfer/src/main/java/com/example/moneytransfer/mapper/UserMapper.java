@@ -25,5 +25,5 @@ public interface UserMapper {
     public List<AccountDTO> getAccountList(@Param("user_code")
                                            int user_code);
 
-    public int getIdByCode(@Param("user_code") int user_code);
+    public String getIdByCode(@Param("user_code") int user_code);
 }

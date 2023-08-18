@@ -13,5 +13,5 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class UserListDTO {
     private int user_code;
-    private String Id;
+    private String user_id;
 }
