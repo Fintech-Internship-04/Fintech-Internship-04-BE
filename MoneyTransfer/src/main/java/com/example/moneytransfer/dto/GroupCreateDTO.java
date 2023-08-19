@@ -12,7 +12,7 @@ import lombok.Setter;
 public class GroupCreateDTO {
 
     private int group_code;
-    private int user_code;
+    private int owner_code;
     private String group_name;
     private int headcount;
 }

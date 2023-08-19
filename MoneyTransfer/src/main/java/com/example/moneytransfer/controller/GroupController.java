@@ -26,7 +26,7 @@ public class GroupController {
 
            GroupCreateDTO groupRequest = new GroupCreateDTO();
 
-           groupRequest.setUser_code((Integer) request.get("user_code"));
+           groupRequest.setOwner_code((Integer) request.get("owner_code"));
            groupRequest.setGroup_name((String) request.get("group_name"));
            groupRequest.setHeadcount((Integer) request.get("headcount"));
 

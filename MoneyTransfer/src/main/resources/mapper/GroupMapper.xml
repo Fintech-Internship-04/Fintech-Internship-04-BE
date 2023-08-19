@@ -8,10 +8,11 @@
             keyProperty="group_request.group_code"
             parameterType = "com.example.moneytransfer.dto.GroupCreateDTO">
         INSERT INTO TB_GROUP
-        (group_name,headcount)
+        (group_name,headcount,owner_code)
         VALUES (
         #{group_request.group_name},
-        #{group_request.headcount}
+        #{group_request.headcount},
+        #{group_request.owner_code}
         );
 
     </insert>
@@ -35,7 +36,7 @@
     </update>
 
     <select id="getGroupList" resultType="Map">
-        SELECT group_code, group_name  FROM
+        SELECT group_code, group_name,headcount FROM
         TB_GROUP WHERE group_code in
         (SELECT group_code AS group_code FROM TB_USER_has_TB_GROUP
                  WHERE user_code = #{user_code})
