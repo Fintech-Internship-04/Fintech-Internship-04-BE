@@ -44,7 +44,10 @@
         WHERE user_code = #{user.user_code}
     </update>
 
-
+    <select id="getUserByName" resultType="Map">
+        SELECT user_code, user_name FROM TB_USER
+        WHERE user_name LIKE CONCAT('%',#{keyword},'%')
+    </select>
 </mapper>
 
 

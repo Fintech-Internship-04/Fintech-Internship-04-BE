@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -39,5 +40,9 @@ public class UserService {
 
     public void editUserInfo(User user){
          userMapper.editUserInfo(user);
+    }
+
+    public List<Map<String,Object>> getUserByName(@Param("keyword") String keyword){
+        return userMapper.getUserByName(keyword);
     }
 }

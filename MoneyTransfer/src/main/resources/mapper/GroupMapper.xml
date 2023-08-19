@@ -56,4 +56,6 @@
     <delete id="deleteGroup">
         DELETE FROM TB_GROUP WHERE group_code = #{group_code}
     </delete>
+
+
 </mapper>

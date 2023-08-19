@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 @Repository
@@ -28,4 +29,6 @@ public interface UserMapper {
     public String getIdByCode(@Param("user_code") int user_code);
 
     public void editUserInfo(@Param("user") User user);
+
+    public List<Map<String,Object>> getUserByName(@Param("keyword") String keyword);
 }

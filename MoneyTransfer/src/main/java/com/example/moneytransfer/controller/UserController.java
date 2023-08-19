@@ -8,6 +8,7 @@ import com.example.moneytransfer.dto.User;
 import com.example.moneytransfer.dto.UserListDTO;
 import com.example.moneytransfer.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -76,6 +77,11 @@ public class UserController {
             return false;
         }
 
+    }
+
+    @GetMapping("/getUserByName/{keyword}")
+    public List<Map<String,Object>> getUserByName(@PathVariable String keyword){
+        return userService.getUserByName(keyword);
     }
 
 }
