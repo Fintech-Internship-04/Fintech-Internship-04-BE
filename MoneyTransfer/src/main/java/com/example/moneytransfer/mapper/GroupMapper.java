@@ -19,7 +19,7 @@ public interface GroupMapper {
 
     //모임에 멤버 추가하기
     public void addMembers(@Param("group_code") Integer group_code,
-            @Param("user_list") List<GroupAddDTO> userList);
+            @Param("user_list") List<Map<String,Object>> userList);
 
     //모임에서 멤버 삭제하기
     public void deleteMembers(@Param("delete_list") List<Integer> deleteUserList);

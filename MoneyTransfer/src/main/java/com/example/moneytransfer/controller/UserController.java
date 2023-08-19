@@ -10,6 +10,8 @@ import com.example.moneytransfer.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,12 +45,15 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public Integer login(@RequestBody Map<String, Object> request)
+    public ResponseEntity<Integer> login(@RequestBody Map<String, Object> request)
     {
 
         String id = (String)request.get("id");
         String password = (String)request.get("password");
-        return userService.login(id,password);
+        if(userService.login(id,password)==null){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<Integer>(userService.login(id,password),HttpStatus.OK);
     }
 
 

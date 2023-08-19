@@ -31,7 +31,7 @@ public class GroupController {
            groupRequest.setHeadcount((Integer) request.get("headcount"));
 
 
-           List<GroupAddDTO> userList = (List<GroupAddDTO>) request.get("user_list");
+           List<Map<String,Object>> userList = (List<Map<String,Object>>) request.get("user_list");
 
 
            System.out.println(groupRequest);
@@ -63,7 +63,7 @@ public class GroupController {
             Integer group_code = (Integer)request.get("group_code");
 
 
-            List<GroupAddDTO> userList = (List<GroupAddDTO>) request.get("user_list");
+            List<Map<String,Object>> userList = (List<Map<String,Object>>) request.get("user_list");
 
             groupService.addMembers(group_code, userList);
         }catch(Exception e)

@@ -94,5 +94,11 @@ public class AccountService {
         return accountMapper.getAccountNum(account_code);
     }
 
+    public void activateGroupPay(int group_code){
+        accountMapper.activateGroupPay(group_code);
+    }
 
+    public void deactivateGroupPay( int group_code){
+        accountMapper.deactivateGroupPay(group_code);
+    }
 }

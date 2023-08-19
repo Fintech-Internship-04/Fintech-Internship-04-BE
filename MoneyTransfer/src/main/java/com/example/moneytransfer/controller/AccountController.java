@@ -69,8 +69,33 @@ public class AccountController {
     @GetMapping("/getBalance/{account_code}")
     public int getBalance(@PathVariable int account_code)
     {
+
         return accountService.getBalance(account_code);
     }
 
+    @GetMapping("/activateGroupPay/{group_code}")
+    public boolean activateGroupPay(@PathVariable int group_code){
 
+        try{
+            accountService.activateGroupPay(group_code);
+            return true;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+    @GetMapping("/deactivateGroupPay/{group_code}")
+    public boolean deactivateGroupPay(@PathVariable  int group_code){
+        try{
+            accountService.deactivateGroupPay(group_code);
+            return true;
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
 }

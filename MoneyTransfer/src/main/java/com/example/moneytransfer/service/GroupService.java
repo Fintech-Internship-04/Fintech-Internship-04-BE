@@ -17,7 +17,7 @@ public class GroupService {
         groupMapper.createGroup(groupRequest);
     }
 
-    public void addMembers(Integer group_code,List<GroupAddDTO> userList){
+    public void addMembers(Integer group_code,List<Map<String,Object>> userList){
 
 
         groupMapper.addMembers(group_code, userList);

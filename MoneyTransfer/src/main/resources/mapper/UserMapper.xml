@@ -55,6 +55,13 @@
             TB_USER WHERE is_buttonOn = 1;
     </select>
 
+    <select id="getIsInvited" resultType="boolean">
+
+        SELECT is_invited FROM TB_USER WHERE
+        user_code = #{user_code}
+    </select>
+
+
 </mapper>
 
 

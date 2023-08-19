@@ -9,6 +9,7 @@
             balance_amt >= #{payment_detail.tran_amt} ;
     </update>
 
+
     <insert id = "createPaymentDetail" useGeneratedKeys="true"
             keyProperty="payment_detail.bank_tran_id" parameterType="com.example.moneytransfer.dto.AccountPaymentDTO">
         INSERT INTO TB_PAYMENT_DETAILS
@@ -57,7 +58,13 @@
     </select>
 
     <update id="activateGroupPay">
-    UPDATE TB_GROUP SET is_active = 1 WHERE group_code = #{group_code}
+        UPDATE TB_GROUP SET is_active = 1 WHERE group_code = #{group_code}
     </update>
+
+    <update id="deactivateGroupPay">
+        UPDATE TB_GROUP SET is_active = 0 WHERE group_code = #{group_code}
+    </update>
+
+
 
 </mapper>

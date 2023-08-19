@@ -28,4 +28,8 @@ public interface AccountMapper {
     public List<Map<String,Object>> getNonCalculateMemberList(@Param("group_code") int group_code);
 
     public String getAccountNum(@Param("account_code") int account_code);
+
+    public void activateGroupPay(@Param("group_code") int group_code);
+
+    public void deactivateGroupPay(@Param("group_code") int group_code);
 }
