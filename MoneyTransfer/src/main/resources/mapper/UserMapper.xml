@@ -22,7 +22,7 @@
     </insert>
 
     <select id="getUserList" resultType="Map">
-        SELECT user_code, id, is_buttonOn FROM
+        SELECT user_code, user_name, is_buttonOn FROM
             TB_USER;
     </select>
 
@@ -48,6 +48,8 @@
         SELECT user_code, user_name FROM TB_USER
         WHERE user_name LIKE CONCAT(#{keyword},'%')
     </select>
+
+
 </mapper>
 
 

@@ -56,6 +56,8 @@
         AND group_code = #{group_code}
     </select>
 
-
+    <update id="activateGroupPay">
+    UPDATE TB_GROUP SET is_active = 1 WHERE group_code = #{group_code}
+    </update>
 
 </mapper>
