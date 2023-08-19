@@ -16,7 +16,7 @@ public class GroupController {
     @Autowired
     GroupService groupService;
 
-
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @PostMapping("/createGroup")
     public boolean createGroup(@RequestBody Map<String, Object> request) {
 
@@ -52,7 +52,7 @@ public class GroupController {
         return true;
     }
 
-
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @PostMapping("/addMembers")
     public boolean addMembers(@RequestBody Map<String, Object> request) {
 
@@ -72,12 +72,14 @@ public class GroupController {
 
         return true;
     }
+
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @GetMapping("/getGroupList/{user_code}")
     public List<Group> getGroupList(@PathVariable Integer user_code) {
 
         return groupService.getGroupList(user_code);
     }
-
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @PostMapping("/leaveGroup")
     public boolean leaveGroup(@RequestParam Integer user_code,
                            @RequestParam Integer group_code)
@@ -91,7 +93,7 @@ public class GroupController {
         return true;
 
     }
-
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @PostMapping("editGroupName/{group_code}/{group_name}")
     public void editGroupName(@PathVariable int group_code,
                               @PathVariable String group_name){

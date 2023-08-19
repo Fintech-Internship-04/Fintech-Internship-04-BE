@@ -13,7 +13,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/test")
 public class TestController {
-
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @GetMapping("/connect")
     public ResponseEntity<Void> connect() {
 

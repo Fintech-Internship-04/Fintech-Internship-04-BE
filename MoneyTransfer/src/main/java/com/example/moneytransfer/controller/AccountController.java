@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+
 @RequestMapping("/api/account")
 public class AccountController {
 
     @Autowired
     AccountService accountService;
 
-
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @PostMapping("/deposit")
     public boolean deposit(@RequestBody AccountPaymentDTO payment_detail)
     {
@@ -29,12 +30,14 @@ public class AccountController {
         }
     }
 
-
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @GetMapping("/getAccountList/{user_code}")
     public List<AccountDTO> getAccountList(@PathVariable Integer user_code)
     {
         return accountService.getAccountList(user_code);
     }
+
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @GetMapping("/getTransferHistory/{account_code}")
     public List<AccountDTO> getTransferHistory(@PathVariable int account_code
     )
@@ -51,12 +54,14 @@ public class AccountController {
        return list;
     }
 
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @GetMapping("/getAccountNum/{account_code}")
     public String getAccountNum(@PathVariable int account_code)
     {
         return accountService.getAccountNum(account_code);
     }
 
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @GetMapping("/getNonCalculateMemberList/{group_code}")
     public List<Map<String,Object>> getNonCalculateMemberList(@PathVariable int group_code
     )
@@ -64,6 +69,8 @@ public class AccountController {
         return accountService.getNonCalculateMemberList(group_code);
     }
 
+
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @GetMapping("/getBalance/{account_code}")
     public int getBalance(@PathVariable int account_code)
     {

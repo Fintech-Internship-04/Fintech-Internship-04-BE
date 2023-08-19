@@ -25,17 +25,21 @@ public class UserController {
     @Autowired
     UserService userService;
     //그룹에 인원 추가
+
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @GetMapping("/getUserInfo/{user_code}")
     public User getUserInfo(@PathVariable int user_code){
         return  userService.getUserInfo(user_code);
     }
 
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @PostMapping("/signup")
     public void signUp(@RequestBody User user)
     {
         userService.signUp(user);
     }
 
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @PostMapping("/login")
     public Integer login(@RequestBody Map<String, Object> request)
     {
@@ -45,6 +49,7 @@ public class UserController {
         return userService.login(id,password);
     }
 
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @GetMapping("/getUserList")
     public List<UserListDTO> getUserList(){
 
@@ -57,6 +62,7 @@ public class UserController {
         return userService.getIdByCode(user_code);
     }
 
+    @CrossOrigin(origins = "https://moneytransfer.kr")
     @PostMapping("/editUserInfo")
     public boolean editUserInfo(@RequestBody User user)
     {
