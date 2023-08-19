@@ -50,6 +50,11 @@
     </select>
 
 
+    <select id="getUserList2" resultType="Map">
+        SELECT user_code, user_name FROM
+            TB_USER WHERE is_buttonOn = 1;
+    </select>
+
 </mapper>
 
 

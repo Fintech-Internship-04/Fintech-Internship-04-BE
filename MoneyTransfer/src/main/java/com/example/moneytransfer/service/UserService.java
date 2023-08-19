@@ -32,6 +32,11 @@ public class UserService {
         return userMapper.getUserList();
     }
 
+    public List<Map<String,Object>> getUserList2(){
+
+        return userMapper.getUserList2();
+    }
+
     public String getIdByCode(int user_code){
         return userMapper.getIdByCode(user_code);
     }

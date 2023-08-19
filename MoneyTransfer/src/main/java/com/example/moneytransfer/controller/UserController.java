@@ -58,6 +58,12 @@ public class UserController {
         return userService.getUserList();
     }
 
+    @GetMapping("/getUserList2")
+    public List<Map<String,Object>> getUserList2(){
+
+        return userService.getUserList2();
+    }
+
     @GetMapping("/getIdByCode/{user_code}")
     public String getIdByCode(@PathVariable int user_code)
     {
