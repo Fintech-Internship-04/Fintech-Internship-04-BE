@@ -53,7 +53,7 @@ public class UserController {
 
 
     @GetMapping("/getUserList")
-    public List<UserListDTO> getUserList(){
+    public List<Map<String,Object>> getUserList(){
 
         return userService.getUserList();
     }

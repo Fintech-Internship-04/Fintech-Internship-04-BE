@@ -22,5 +22,7 @@ public class User {
 
     private LocalDateTime updatedAt;
 
+    private boolean is_buttonOn;
+
 
 }

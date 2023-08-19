@@ -21,8 +21,8 @@
 
     </insert>
 
-    <select id="getUserList" resultType="com.example.moneytransfer.dto.UserListDTO">
-        SELECT user_code, id FROM
+    <select id="getUserList" resultType="Map">
+        SELECT user_code, id, is_buttonOn FROM
             TB_USER;
     </select>
 
@@ -46,7 +46,7 @@
 
     <select id="getUserByName" resultType="Map">
         SELECT user_code, user_name FROM TB_USER
-        WHERE user_name LIKE CONCAT('%',#{keyword},'%')
+        WHERE user_name LIKE CONCAT(#{keyword},'%')
     </select>
 </mapper>
 

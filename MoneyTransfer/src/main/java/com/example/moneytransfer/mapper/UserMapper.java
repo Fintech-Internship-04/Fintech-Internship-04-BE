@@ -21,7 +21,7 @@ public interface UserMapper {
     public Integer login(@Param("id") String id,
                          @Param("password") String password);
 
-    public List<UserListDTO> getUserList();
+    public List<Map<String,Object>> getUserList();
 
     public List<AccountDTO> getAccountList(@Param("user_code")
                                            int user_code);

@@ -76,7 +76,7 @@ public class GroupController {
 
 
     @GetMapping("/getGroupList/{user_code}")
-    public List<Group> getGroupList(@PathVariable Integer user_code) {
+    public List<Map<String,Object>> getGroupList(@PathVariable Integer user_code) {
 
         return groupService.getGroupList(user_code);
     }

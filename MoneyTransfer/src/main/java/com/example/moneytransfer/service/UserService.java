@@ -27,7 +27,7 @@ public class UserService {
         return userMapper.login(id,password);
     }
 
-    public List<UserListDTO> getUserList(){
+    public List<Map<String,Object>> getUserList(){
 
         return userMapper.getUserList();
     }

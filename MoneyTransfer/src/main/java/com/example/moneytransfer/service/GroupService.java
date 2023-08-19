@@ -23,9 +23,23 @@ public class GroupService {
         groupMapper.addMembers(group_code, userList);
     }
 
-    public List<Group> getGroupList(Integer user_code){
-        return groupMapper.getGroupList(user_code);
+    public List<Map<String,Object>> getGroupList(Integer user_code){
+
+
+        List<Map<String,Object>> list = groupMapper.getGroupList(user_code);
+
+        System.out.println(list);
+        for(Map<String,Object> item : list)
+        {
+            int group_code = (int)item.get("group_code");
+            List<Map<String,Object>> userList = groupMapper.getMemberListFromGroup(group_code);
+            item.put("userList",userList);
+        }
+
+        return list;
     }
+
+
 
 
     public void leaveGroup(Integer user_code,

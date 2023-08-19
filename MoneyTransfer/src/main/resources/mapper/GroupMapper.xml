@@ -34,12 +34,21 @@
         group_code = #{group_code}
     </update>
 
-    <select id="getGroupList" resultType="com.example.moneytransfer.dto.Group">
-        SELECT group_code, group_name FROM
+    <select id="getGroupList" resultType="Map">
+        SELECT group_code, group_name  FROM
         TB_GROUP WHERE group_code in
         (SELECT group_code AS group_code FROM TB_USER_has_TB_GROUP
                  WHERE user_code = #{user_code})
     </select>
+
+    <select id="getMemberListFromGroup" resultType="Map">
+
+        SELECT B.user_code, A.user_name FROM TB_USER AS A INNER JOIN
+        TB_USER_has_TB_GROUP AS B
+        ON A.user_code = B.user_code
+        WHERE B.group_code = #{group_code}
+    </select>
+
 
     <delete id="leaveGroup">
 

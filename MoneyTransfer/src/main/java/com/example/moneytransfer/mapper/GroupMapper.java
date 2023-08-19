@@ -24,8 +24,8 @@ public interface GroupMapper {
     //모임에서 멤버 삭제하기
     public void deleteMembers(@Param("delete_list") List<Integer> deleteUserList);
 
-
-    public List<Group> getGroupList(@Param("user_code") Integer user_code);
+    public List<Map<String,Object>> getMemberListFromGroup(@Param("group_code") int group_code);
+    public List<Map<String,Object>> getGroupList(@Param("user_code") Integer user_code);
 
     public void leaveGroup(@Param("user_code") Integer user_code,
                            @Param("group_code") Integer group_code);
