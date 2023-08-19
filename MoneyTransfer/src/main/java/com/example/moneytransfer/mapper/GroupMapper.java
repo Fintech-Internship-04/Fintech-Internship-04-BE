@@ -11,14 +11,11 @@ import java.util.*;
 @Mapper
 @Repository
 public interface GroupMapper {
-
-
-
     //모임 생성하기
     public void createGroup(@Param("group_request") GroupCreateDTO groupRequest);
 
     //모임에 멤버 추가하기
-    public void addMembers(@Param("group_code") Integer group_code,
+    public void inviteMembers(@Param("group_code") Integer group_code,
             @Param("user_list") List<Map<String,Object>> userList);
 
     //모임에서 멤버 삭제하기
@@ -37,6 +34,14 @@ public interface GroupMapper {
     public int getGroupHeadCount(@Param("group_code") Integer group_code);
 
     public void deleteGroup(@Param("group_code") Integer group_code);
+
+    public void acceptInvite(@Param("user_code") int user_code, @Param("group_code") int group_code);
+    public void disableInvite(@Param("user_code") Integer user_code);
+
+    public void inviteMembers(@Param("user_code") int user_code, @Param("user_list") List<Map<String,Object>> userList);
+    public List<Map<String,Object>> getMemberListFromGroupExceptMe(@Param("user_code") int user_code, @Param("group_code") int group_code);
+
+    public List<Map<String,Object>> checkInvite(@Param("user_code") int user_code);
 
 
 }

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,15 +33,26 @@ public class UserController {
 
 
     @GetMapping("/getUserInfo/{user_code}")
-    public User getUserInfo(@PathVariable int user_code){
-        return  userService.getUserInfo(user_code);
+    public ResponseEntity<User> getUserInfo(@PathVariable int user_code){
+        if(userService.getUserInfo(user_code)==null)
+        {
+            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<User>(userService.getUserInfo(user_code),HttpStatus.BAD_REQUEST);
     }
 
 
     @PostMapping("/signup")
-    public void signUp(@RequestBody User user)
+    public ResponseEntity<Void> signUp(@RequestBody User user)
     {
-        userService.signUp(user);
+        try{
+            userService.signUp(user);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
     }
 
 
@@ -50,7 +62,9 @@ public class UserController {
 
         String id = (String)request.get("id");
         String password = (String)request.get("password");
+        System.out.println(userService.login(id,password));
         if(userService.login(id,password)==null){
+            System.out.println("hello");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<Integer>(userService.login(id,password),HttpStatus.OK);
@@ -58,15 +72,24 @@ public class UserController {
 
 
     @GetMapping("/getUserList")
-    public List<Map<String,Object>> getUserList(){
-
-        return userService.getUserList();
+    public ResponseEntity<List<Map<String,Object>>> getUserList(){
+        List<Map<String,Object>> list = userService.getUserList();
+        if(list==null)
+        {
+            return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<Map<String,Object>>>(list,HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/getUserList2")
-    public List<Map<String,Object>> getUserList2(){
+    public ResponseEntity<List<Map<String,Object>>> getUserList2(){
 
-        return userService.getUserList2();
+        List<Map<String,Object>> list = userService.getUserList2();
+        if(list==null)
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<Map<String,Object>>>(list,HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping("/getIdByCode/{user_code}")
@@ -93,6 +116,11 @@ public class UserController {
     @GetMapping("/getUserByName/{keyword}")
     public List<Map<String,Object>> getUserByName(@PathVariable String keyword){
         return userService.getUserByName(keyword);
+    }
+
+    @GetMapping("/getUserNameByCode/{user_code}")
+    public String getUserNameByCode(int user_code) {
+        return userService.getUserNameByCode(user_code);
     }
 
 }

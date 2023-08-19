@@ -21,11 +21,33 @@ public class AccountService {
     @Transactional
     public boolean deposit(AccountPaymentDTO payment_detail)
     {
-       
+        payment_detail.setAccount_code(accountMapper.getAccountCode(payment_detail.getUser_code()));
         int balance = accountMapper.getBalance(payment_detail.getAccount_code());
         payment_detail.setTran_amt(-payment_detail.getTran_amt());
         System.out.println(payment_detail.getTran_amt());
         System.out.println(balance);
+        Integer user_code = payment_detail.getUser_code();
+        Integer to_user_code = payment_detail.getTo_user_code();
+        Integer group_code = payment_detail.getGroup_code();
+        if(user_code!=null)
+        {
+            if(group_code!=null)
+            {
+                payment_detail.setAccount_code(accountMapper.getAccountCode(user_code));
+            }
+            else {
+                if (to_user_code != null)
+                {
+                    payment_detail.setTo_account_code(accountMapper.getAccountCode(to_user_code));
+                }
+            }
+
+        }
+
+        if(to_user_code!=null)
+        {
+            payment_detail.setTo_account_code(accountMapper.getAccountCode(to_user_code));
+        }
 
         //출금하려는 계좌의 잔액이 출금액보다 더 큰 경우에
         if(balance+payment_detail.getTran_amt()>0){
@@ -33,15 +55,19 @@ public class AccountService {
             payment_detail.set_taken(true);
             accountMapper.deposit(payment_detail);
             int from_account_code = payment_detail.getAccount_code();
-            int to_account_code = payment_detail.getTo_account_code();
+            Integer to_account_code = payment_detail.getTo_account_code();
             int tran_amt = payment_detail.getTran_amt();
 
+            if(payment_detail.getTo_user_code()==null)
+            {
+                payment_detail.setTo_user_code(0);
+            }
             //출금내역 입력
             accountMapper.createPaymentDetail(payment_detail);
 
             //입금
             accountMapper.deposit(payment_detail);
-            if(payment_detail.getTo_user_code()!=null)
+            if(payment_detail.getTo_user_code()!=0)
             {
                 payment_detail.setAccount_code(to_account_code);
                 payment_detail.setTo_account_code(from_account_code);
@@ -101,4 +127,27 @@ public class AccountService {
     public void deactivateGroupPay( int group_code){
         accountMapper.deactivateGroupPay(group_code);
     }
+
+    public void insertGroupPayRequest(AccountPaymentDTO payment_detail,List<Map<String,Object>> memberList, int to_user_code){
+
+        accountMapper.insertGroupPayRequest(payment_detail,memberList,to_user_code);
+    }
+
+    public int checkGroupPay(int user_code){
+       return accountMapper.checkGroupPay(user_code);
+    }
+
+    public List<Map<String,Object>> getGroupPay(int user_code){
+        return accountMapper.getGroupPay(user_code);
+    }
+
+    public List<Map<String,Object>> getGroupPaymentDetails(int group_code){
+        return accountMapper.getGroupPaymentDetails(group_code);
+    }
+
+    public void acceptGroupPay(int user_code, int group_code){
+        accountMapper.acceptGroupPay(user_code,group_code);
+    }
 }
+
+

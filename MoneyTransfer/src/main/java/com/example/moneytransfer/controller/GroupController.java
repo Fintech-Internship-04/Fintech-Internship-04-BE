@@ -6,6 +6,9 @@ import com.example.moneytransfer.dto.GroupAddDTO;
 import com.example.moneytransfer.dto.GroupCreateDTO;
 import com.example.moneytransfer.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
 @RestController
@@ -18,15 +21,16 @@ public class GroupController {
     GroupService groupService;
 
 
+    @Transactional
     @PostMapping("/createGroup")
-    public boolean createGroup(@RequestBody Map<String, Object> request) {
+    public ResponseEntity<String> createGroup(@RequestBody Map<String, Object> request) {
 
        try{
            System.out.println(request);
 
            GroupCreateDTO groupRequest = new GroupCreateDTO();
 
-           groupRequest.setOwner_code((Integer) request.get("owner_code"));
+           groupRequest.setOwner_code((Integer) request.get("user_code"));
            groupRequest.setGroup_name((String) request.get("group_name"));
            groupRequest.setHeadcount((Integer) request.get("headcount"));
 
@@ -40,39 +44,22 @@ public class GroupController {
 
            groupService.createGroup(groupRequest);
            Integer group_code = groupRequest.getGroup_code();
+           Integer user_code  = groupRequest.getOwner_code();
 
            System.out.println(group_code);
 
-           groupService.addMembers(group_code, userList);
+           groupService.inviteMembers(group_code, userList);
+
+
        }catch(Exception e)
        {
            e.printStackTrace();
-           return false;
+           return new ResponseEntity<String>("그룹 초대에 실패했습니다.",HttpStatus.BAD_REQUEST);
        }
 
-        return true;
+        return new ResponseEntity<String>("그룹 초대 발송에 성공했습니다.",HttpStatus.OK);
     }
 
-
-    @PostMapping("/addMembers")
-    public boolean addMembers(@RequestBody Map<String, Object> request) {
-
-        try{
-            System.out.println(request);
-
-            Integer group_code = (Integer)request.get("group_code");
-
-
-            List<Map<String,Object>> userList = (List<Map<String,Object>>) request.get("user_list");
-
-            groupService.addMembers(group_code, userList);
-        }catch(Exception e)
-        {
-            return false;
-        }
-
-        return true;
-    }
 
 
     @GetMapping("/getGroupList/{user_code}")
@@ -101,5 +88,61 @@ public class GroupController {
 
         groupService.editGroupName(group_code,group_name);
     }
+
+    @PostMapping("/disableInvite/{user_code}")
+    public ResponseEntity<Void> disableInvite(@PathVariable int user_code){
+
+        try{
+            groupService.disableInvite(user_code);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping("/acceptInvite")
+    public ResponseEntity<String> acceptInvite(@RequestBody Map<String,Object> request){
+        try{
+            int user_code = (int)request.get("user_code");
+            int group_code = (int)request.get("group_code");
+            groupService.acceptInvite(user_code,group_code);
+            groupService.disableInvite(user_code);
+            return new ResponseEntity("초대수락에 성공했습니다.",HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity("초대수락에 실패했습니다.",HttpStatus.BAD_REQUEST);
+
+        }
+
+
+    }
+    
+    @GetMapping("/getMemberListFromGroup/{group_code}")
+    public ResponseEntity<List<Map<String,Object>>> getMemberListFromGroup(@PathVariable int group_code){
+        List<Map<String,Object>> list = groupService.getMemberListFromGroup(group_code);
+        if(list==null)
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<Map<String,Object>>>(list,HttpStatus.OK);
+    }
+
+    @GetMapping("/getMemberListFromGroupExceptMe")
+    public ResponseEntity<List<Map<String,Object>>> getMemberListFromGroupExceptMe(@RequestParam int user_code,
+                                                                                   @RequestParam int group_code){
+        List<Map<String,Object>> list = groupService.getMemberListFromGroupExceptMe(user_code,group_code);
+        if(list==null)
+        {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<List<Map<String,Object>>>(list,HttpStatus.OK);
+    }
+
+    @GetMapping("/checkInvite/{user_code}")
+    public List<Map<String,Object>> checkInvite(@PathVariable int user_code){
+        return groupService.checkInvite(user_code);
+    }
+
 
 }

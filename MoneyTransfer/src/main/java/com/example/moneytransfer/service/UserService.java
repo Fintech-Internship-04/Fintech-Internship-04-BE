@@ -50,4 +50,7 @@ public class UserService {
     public List<Map<String,Object>> getUserByName(@Param("keyword") String keyword){
         return userMapper.getUserByName(keyword);
     }
+    public String getUserNameByCode(int user_code) {
+        return userMapper.getUserNameByCode(user_code);
+    }
 }

@@ -18,6 +18,8 @@ public class User {
 
     private String phone_num;
 
+    private String user_name;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;

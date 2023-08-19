@@ -17,10 +17,10 @@ public class GroupService {
         groupMapper.createGroup(groupRequest);
     }
 
-    public void addMembers(Integer group_code,List<Map<String,Object>> userList){
+    public void inviteMembers(Integer group_code,List<Map<String,Object>> userList){
 
 
-        groupMapper.addMembers(group_code, userList);
+        groupMapper.inviteMembers(group_code, userList);
     }
 
     public List<Map<String,Object>> getGroupList(Integer user_code){
@@ -39,8 +39,14 @@ public class GroupService {
         return list;
     }
 
+    public List<Map<String,Object>> getMemberListFromGroup(int group_code){
+        return groupMapper.getMemberListFromGroup(group_code);
+    }
 
 
+    public List<Map<String,Object>> getMemberListFromGroupExceptMe(int user_code, int group_code){
+        return groupMapper.getMemberListFromGroupExceptMe(user_code,group_code);
+    }
 
     public void leaveGroup(Integer user_code,
                             Integer group_code)
@@ -57,5 +63,21 @@ public class GroupService {
         groupMapper.editGroupName(group_code, name);
     }
 
+
+    public int getHeadCount(int group_code)
+    {
+        return groupMapper.getGroupHeadCount(group_code);
+    }
+
+    public void disableInvite(Integer user_code) {
+        groupMapper.disableInvite(user_code);
+    }
+    public void acceptInvite(int user_code, int group_code){
+        groupMapper.acceptInvite(user_code,group_code);
+    }
+
+    public List<Map<String,Object>> checkInvite(int user_code){
+        return groupMapper.checkInvite(user_code);
+    }
 
 }

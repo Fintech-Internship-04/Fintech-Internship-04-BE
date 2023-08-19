@@ -32,4 +32,17 @@ public interface AccountMapper {
     public void activateGroupPay(@Param("group_code") int group_code);
 
     public void deactivateGroupPay(@Param("group_code") int group_code);
+
+    public int getAccountCode(@Param("user_code") int user_code);
+
+    public boolean insertGroupPayRequest(@Param("payment_detail") AccountPaymentDTO payment_detail,
+                                         @Param("member_list") List<Map<String,Object>> memberList
+                                        ,@Param("to_user_code") int to_user_code);
+    public List<Map<String,Object>> getGroupPay(@Param("user_code") int group_code);
+    public int checkGroupPay(@Param("user_code") int user_code);
+
+    public void acceptGroupPay(@Param("user_code") int user_code, @Param("group_code") int group_code);
+
+    public List<Map<String,Object>> getGroupPaymentDetails(@Param("group_code") int group_code);
+
 }

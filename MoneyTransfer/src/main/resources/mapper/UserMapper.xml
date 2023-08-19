@@ -10,13 +10,14 @@
 
     <insert id="signUp" parameterType = "com.example.moneytransfer.dto.User" useGeneratedKeys="true" keyProperty="user_code">
         INSERT INTO TB_USER
-        (id,password,phone_num, createdAt, updatedAt)
+        (id,password,phone_num, createdAt, updatedAt,user_name)
         VALUES (
                 #{user.id},
                 #{user.password},
                 #{user.phone_num},
                 NOW(),
-                NOW()
+                NOW(),
+                #{user.user_name}
             )
 
     </insert>
@@ -47,6 +48,11 @@
     <select id="getUserByName" resultType="Map">
         SELECT user_code, user_name FROM TB_USER
         WHERE user_name LIKE CONCAT(#{keyword},'%')
+    </select>
+
+    <select id="getUserNameByCode" resultType="Map">
+        SELECT user_name FROM TB_USER
+        WHERE user_code = #{user_code}
     </select>
 
 
