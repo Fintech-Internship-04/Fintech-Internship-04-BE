@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
 import java.util.*;
 @RestController
 @CrossOrigin
@@ -119,14 +121,24 @@ public class GroupController {
     }
     
     @GetMapping("/getMemberListFromGroup/{group_code}")
-    public ResponseEntity<List<Map<String,Object>>> getMemberListFromGroup(@PathVariable int group_code){
+    public ResponseEntity<Map<String,Object>> getMemberListFromGroup(@PathVariable int group_code){
         List<Map<String,Object>> list = groupService.getMemberListFromGroup(group_code);
+        String group_name = groupService.getNameFromGroup(group_code);
+        LocalDateTime date = groupService.getDateFromGroup(group_code);
+        Map<String,Object> map = new HashMap<String,Object>();
         if(list==null)
         {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<List<Map<String,Object>>>(list,HttpStatus.OK);
+
+        System.out.println(list);
+        map.put("group_name",group_name);
+        map.put("createdAt",date);
+        map.put("user_list",list);
+        return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
     }
+
+
 
     @GetMapping("/getMemberListFromGroupExceptMe")
     public ResponseEntity<List<Map<String,Object>>> getMemberListFromGroupExceptMe(@RequestParam int user_code,

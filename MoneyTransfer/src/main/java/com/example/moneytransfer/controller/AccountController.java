@@ -165,6 +165,17 @@ public class AccountController {
 
     }
 
+    @PostMapping("/changeIsRespond")
+    public boolean changeIsRespond(@RequestBody List<Map<String,Object>> user_list){
+        try{
+            accountService.changeIsRespond(user_list);
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     @PostMapping("/refuseGroupPay")
     public ResponseEntity<Void> refuseGroupPay(@RequestBody Map<String,Object> request)
     {

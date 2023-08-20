@@ -103,6 +103,14 @@
                                                          AND group_code = #{group_code}
     </update>
 
+    <update id="changeIsRespond" parameterMap="List">
+        UPDATE TB_GROUP_PAY_REQUEST SET is_respond = 1
+        WHERE user_code IN
+        <foreach collection="user_list" item="item" separator="," open="(" close=")">
+            #{item.user_code}
+        </foreach>
+    </update>
+
     <select id= "getGroupPaymentDetails" resultType="Map">
 
         SELECT * FROM TB_PAYMENT_DETAILS WHERE group_code = #{group_code}

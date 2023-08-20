@@ -7,6 +7,9 @@ import com.example.moneytransfer.dto.GroupCreateDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 @Mapper
 @Repository
@@ -43,5 +46,8 @@ public interface GroupMapper {
 
     public List<Map<String,Object>> checkInvite(@Param("user_code") int user_code);
 
+    public Map<String,Object> getNameAndDateFromGroup(@Param("group_code") int group_code);
 
+    public String getNameFromGroup(@Param("group_code") int group_code);
+    public LocalDateTime getDateFromGroup(@Param("group_code") int group_code);
 }

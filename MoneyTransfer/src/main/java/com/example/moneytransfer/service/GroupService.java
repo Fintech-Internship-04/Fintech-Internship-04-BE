@@ -6,6 +6,8 @@ import com.example.moneytransfer.mapper.GroupMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.*;
 @Service
 public class GroupService {
@@ -43,9 +45,18 @@ public class GroupService {
         return groupMapper.getMemberListFromGroup(group_code);
     }
 
-
+    public Map<String,Object> getNameAndDateFromGroup(int group_code){
+        return groupMapper.getNameAndDateFromGroup(group_code);
+    }
     public List<Map<String,Object>> getMemberListFromGroupExceptMe(int user_code, int group_code){
         return groupMapper.getMemberListFromGroupExceptMe(user_code,group_code);
+    }
+
+    public String getNameFromGroup(@Param("group_code") int group_code){
+        return groupMapper.getNameFromGroup(group_code);
+    }
+    public LocalDateTime getDateFromGroup(@Param("group_code") int group_code){
+        return groupMapper.getDateFromGroup(group_code);
     }
 
     public void leaveGroup(Integer user_code,

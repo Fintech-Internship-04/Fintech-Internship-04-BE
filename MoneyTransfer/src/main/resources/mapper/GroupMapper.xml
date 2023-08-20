@@ -8,11 +8,12 @@
             keyProperty="group_request.group_code"
             parameterType = "com.example.moneytransfer.dto.GroupCreateDTO">
         INSERT INTO TB_GROUP
-        (group_name,headcount,owner_code)
+        (group_name,headcount,owner_code, createdAt)
         VALUES (
         #{group_request.group_name},
         #{group_request.headcount},
-        #{group_request.owner_code}
+        #{group_request.owner_code},
+        NOW()
         );
 
     </insert>
@@ -60,6 +61,15 @@
         TB_USER_has_TB_GROUP AS B
         ON A.user_code = B.user_code
         WHERE B.group_code = #{group_code}
+    </select>
+
+    <select id="getNameFromGroup" resultType="String">
+
+       SELECT group_name FROM TB_GROUP WHERE group_code = #{group_code}
+    </select>
+
+    <select id="getDateFromGroup" resultType="java.time.LocalDateTime">
+        SELECT NOW();
     </select>
 
     <select id="getMemberListFromGroupExceptMe" resultType="Map">
