@@ -65,7 +65,20 @@ public class AccountController {
         return true;
     }
 
+    @PostMapping("/checkIsRequest")
+    public boolean checkIsRequest(@RequestBody Map<String,Object> request){
 
+        try{
+            accountService.checkIsRequest((List<Map<String,Object>>)request.get("user_list"));
+            return true;
+        }catch(Exception e)
+        {
+
+            e.printStackTrace();
+            return false;
+        }
+
+    }
 
     @GetMapping("/getAccountList/{user_code}")
     public List<AccountDTO> getAccountList(@PathVariable Integer user_code)

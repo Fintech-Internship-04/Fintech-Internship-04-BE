@@ -49,5 +49,7 @@ public interface AccountMapper {
 
     public void enrollAccount(@Param("account") AccountDTO account);
 
+    public void checkIsRequest(@Param("user_list") List<Map<String,Object>> user_list);
+
 
 }

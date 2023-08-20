@@ -161,6 +161,10 @@ public class AccountService {
         accountMapper.enrollAccount(account);
     }
 
+    public void checkIsRequest(List<Map<String,Object>> user_list){
+        accountMapper.checkIsRequest(user_list);
+    }
+
 
 
 }
