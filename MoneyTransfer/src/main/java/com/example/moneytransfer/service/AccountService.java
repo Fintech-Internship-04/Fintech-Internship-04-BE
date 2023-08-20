@@ -21,28 +21,29 @@ public class AccountService {
     @Transactional
     public boolean deposit(AccountPaymentDTO payment_detail)
     {
-        payment_detail.setAccount_code(accountMapper.getAccountCode(payment_detail.getUser_code()));
+        Integer user_code = payment_detail.getUser_code();
+        Integer to_user_code = payment_detail.getTo_user_code();
+        Integer group_code = payment_detail.getGroup_code();
+        payment_detail.setAccount_code(accountMapper.getAccountCode(user_code));
         int balance = accountMapper.getBalance(payment_detail.getAccount_code());
         payment_detail.setTran_amt(-payment_detail.getTran_amt());
         System.out.println(payment_detail.getTran_amt());
         System.out.println(balance);
-        Integer user_code = payment_detail.getUser_code();
-        Integer to_user_code = payment_detail.getTo_user_code();
-        Integer group_code = payment_detail.getGroup_code();
-        if(user_code!=null)
-        {
-            if(group_code!=null)
-            {
-                payment_detail.setAccount_code(accountMapper.getAccountCode(user_code));
-            }
-            else {
-                if (to_user_code != null)
-                {
-                    payment_detail.setTo_account_code(accountMapper.getAccountCode(to_user_code));
-                }
-            }
 
+        if (group_code != null) {
+            payment_detail.setAccount_code(accountMapper.getAccountCode(user_code));
+        } else {
+            if (to_user_code != null) {
+                payment_detail.setTo_account_code(accountMapper.getAccountCode(to_user_code));
+            }
         }
+
+        if(!payment_detail.is_taken())
+        {
+            accountMapper.createPaymentDetail(payment_detail);
+            return false;
+        }
+
 
         if(to_user_code!=null)
         {
@@ -69,6 +70,8 @@ public class AccountService {
             accountMapper.deposit(payment_detail);
             if(payment_detail.getTo_user_code()!=0)
             {
+                payment_detail.setTo_user_code(user_code);
+                payment_detail.setUser_code(to_user_code);
                 payment_detail.setAccount_code(to_account_code);
                 payment_detail.setTo_account_code(from_account_code);
                 payment_detail.setTran_amt(-payment_detail.getTran_amt());
@@ -148,6 +151,17 @@ public class AccountService {
     public void acceptGroupPay(int user_code, int group_code){
         accountMapper.acceptGroupPay(user_code,group_code);
     }
+
+    public void refuseGroupPay(int user_code, int group_code){
+        accountMapper.refuseGroupPay(user_code,group_code);
+    }
+
+    public void enrollAccount(AccountDTO account){
+
+        accountMapper.enrollAccount(account);
+    }
+
+
 }
 
 

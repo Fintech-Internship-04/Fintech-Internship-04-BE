@@ -15,4 +15,5 @@ public class AccountDTO {
     private int balance_amt;
     private int user_code;
     private String account_num;
+    private String bank_name;
 }

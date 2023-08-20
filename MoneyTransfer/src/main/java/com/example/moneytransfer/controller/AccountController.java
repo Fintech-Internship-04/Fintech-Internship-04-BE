@@ -173,10 +173,10 @@ public class AccountController {
             dto.setUser_code((int)request.get("user_code"));
             dto.setGroup_code((int)request.get("group_code"));
             dto.setTo_user_code((int)request.get("to_user_code"));
-
+            dto.set_taken(false);
             accountService.deposit(dto);
 
-            accountService.acceptGroupPay((int)request.get("user_code"),
+            accountService.refuseGroupPay((int)request.get("user_code"),
                     (int)request.get("group_code"));
             return new ResponseEntity<>(HttpStatus.OK);
 
@@ -200,6 +200,15 @@ public class AccountController {
         }
     }
 
-
+    @PostMapping("/enrollAccount")
+    public ResponseEntity<Void> enrollAccount(@RequestBody AccountDTO account) {
+        try{
+            accountService.enrollAccount(account);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch(Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }

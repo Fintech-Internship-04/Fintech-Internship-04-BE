@@ -98,10 +98,27 @@
         AND group_code = #{group_code}
     </update>
 
+    <update id ="refuseGroupPay">
+        UPDATE TB_GROUP_PAY_REQUEST SET is_respond = 1 WHERE user_code = #{user_code}
+                                                         AND group_code = #{group_code}
+    </update>
+
     <select id= "getGroupPaymentDetails" resultType="Map">
 
         SELECT * FROM TB_PAYMENT_DETAILS WHERE group_code = #{group_code}
     </select>
+
+    <insert id="enrollAccount" useGeneratedKeys="true"
+            keyProperty="account.account_code"
+            parameterType="com.example.moneytransfer.dto.AccountDTO">
+        INSERT INTO TB_ACCOUNT
+            (user_code, account_num, bank_name)
+        VALUES (
+                   #{account.user_code},
+                   #{account.account_num},
+                   #{account.bank_name}
+               )
+    </insert>
 
 
 

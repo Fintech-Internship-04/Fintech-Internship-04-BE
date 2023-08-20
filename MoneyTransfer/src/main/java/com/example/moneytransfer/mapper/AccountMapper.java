@@ -43,6 +43,10 @@ public interface AccountMapper {
 
     public void acceptGroupPay(@Param("user_code") int user_code, @Param("group_code") int group_code);
 
+
+    public void refuseGroupPay(@Param("user_code") int user_code, @Param("group_code") int group_code);
     public List<Map<String,Object>> getGroupPaymentDetails(@Param("group_code") int group_code);
+
+    public void enrollAccount(@Param("account") AccountDTO account);
 
 }
