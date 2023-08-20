@@ -18,7 +18,7 @@ public interface UserMapper {
 
     public void signUp(@Param("user") User user);
 
-    public Integer login(@Param("id") String id,
+    public Map<String,Object> login(@Param("id") String id,
                          @Param("password") String password);
 
     public List<Map<String,Object>> getUserList();

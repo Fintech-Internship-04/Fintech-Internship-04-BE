@@ -22,8 +22,7 @@ public class UserService {
 
         userMapper.signUp(user);
     }
-
-    public Integer login(String id, String password){
+    public Map<String,Object> login(String id, String password){
         return userMapper.login(id,password);
     }
 

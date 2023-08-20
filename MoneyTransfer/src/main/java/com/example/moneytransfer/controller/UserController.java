@@ -38,7 +38,7 @@ public class UserController {
         {
             return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<User>(userService.getUserInfo(user_code),HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<User>(userService.getUserInfo(user_code),HttpStatus.OK);
     }
 
 
@@ -47,17 +47,17 @@ public class UserController {
     {
         try{
             userService.signUp(user);
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.OK);
         }catch(Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
     }
 
 
     @PostMapping("/login")
-    public ResponseEntity<Integer> login(@RequestBody Map<String, Object> request)
+    public ResponseEntity<Map<String,Object>> login(@RequestBody Map<String, Object> request)
     {
 
         String id = (String)request.get("id");
@@ -67,7 +67,7 @@ public class UserController {
             System.out.println("hello");
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<Integer>(userService.login(id,password),HttpStatus.OK);
+        return new ResponseEntity<Map<String,Object>>(userService.login(id,password),HttpStatus.OK);
     }
 
 
@@ -78,18 +78,18 @@ public class UserController {
         {
             return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<List<Map<String,Object>>>(list,HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<List<Map<String,Object>>>(list,HttpStatus.OK);
     }
 
     @GetMapping("/getUserList2")
     public ResponseEntity<List<Map<String,Object>>> getUserList2(){
 
         List<Map<String,Object>> list = userService.getUserList2();
-        if(list==null)
-        {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<List<Map<String,Object>>>(list,HttpStatus.BAD_REQUEST);
+//        if(list==null)
+//        {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+        return new ResponseEntity<List<Map<String,Object>>>(list,HttpStatus.OK);
     }
 
     @GetMapping("/getIdByCode/{user_code}")
