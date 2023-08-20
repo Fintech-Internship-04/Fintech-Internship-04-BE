@@ -62,7 +62,7 @@
 
     <select id="getMemberListFromGroup" resultType="Map">
 
-        SELECT B.user_code, A.user_name FROM TB_USER AS A INNER JOIN
+        SELECT B.user_code, A.user_name, A.is_taken FROM TB_USER AS A INNER JOIN
         TB_USER_has_TB_GROUP AS B
         ON A.user_code = B.user_code
         WHERE B.group_code = #{group_code}

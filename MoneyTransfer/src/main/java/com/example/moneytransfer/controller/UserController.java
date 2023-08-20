@@ -128,5 +128,14 @@ public class UserController {
         return userService.getUserByName(keyword);
     }
 
+    @GetMapping("/getIsTaken/{user_code}")
+    public int getIsTaken(@PathVariable int user_code){
+        return userService.getIsTaken(user_code);
+    }
+
+    @PostMapping("/checkIsTaken/{user_code}")
+    public void checkIsTaken(@PathVariable int user_code){
+        userService.checkIsTaken(user_code);
+    }
 
 }

@@ -55,4 +55,11 @@ public class UserService {
     public int getIsRequest( int user_code){
         return userMapper.getIsRequest(user_code);
     }
+    public int getIsTaken(int user_code){
+        return userMapper.getIsTaken(user_code);
+    }
+
+    public void checkIsTaken(int user_code){
+        userMapper.checkIsTaken(user_code);
+    }
 }

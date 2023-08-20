@@ -37,5 +37,8 @@ public interface UserMapper {
 
     public int getIsRequest(@Param("user_code") int user_code);
 
+    public int getIsTaken(@Param("user_code") int user_code);
+
+    public void checkIsTaken(@Param("user_code") int user_code);
 
 }

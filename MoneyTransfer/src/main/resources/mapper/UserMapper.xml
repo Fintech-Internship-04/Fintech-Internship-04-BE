@@ -78,6 +78,10 @@
             user_code = #{user_code}
     </update>
 
+    <select id = "getIsTaken" resultType="int">
+        SELECT is_taken FROM TB_USER WHERE user_code = #{user_code}
+    </select>
+
 
 </mapper>
 
