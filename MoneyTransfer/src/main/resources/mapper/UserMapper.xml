@@ -27,7 +27,7 @@
             TB_USER;
     </select>
 
-    <select id ="login" resultType ="int">
+    <select id ="login" resultType ="Map">
         SELECT user_code, user_name FROM TB_USER WHERE id = #{id} AND password = #{password}
     </select>
 

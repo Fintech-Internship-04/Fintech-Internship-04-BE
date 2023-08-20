@@ -59,7 +59,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<Map<String,Object>> login(@RequestBody Map<String, Object> request)
     {
-
+        System.out.println(request);
         String id = (String)request.get("id");
         String password = (String)request.get("password");
         System.out.println(userService.login(id,password));
