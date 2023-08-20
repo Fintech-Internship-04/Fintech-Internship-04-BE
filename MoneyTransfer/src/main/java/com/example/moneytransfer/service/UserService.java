@@ -52,4 +52,8 @@ public class UserService {
     public String getUserNameByCode(int user_code) {
         return userMapper.getUserNameByCode(user_code);
     }
+
+    public int getIsRequest( int user_code){
+        return userMapper.getIsRequest(user_code);
+    }
 }

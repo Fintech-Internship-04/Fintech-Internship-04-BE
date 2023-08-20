@@ -22,6 +22,12 @@
 
     </insert>
 
+
+    <select id="getIsRequest" resultType="int">
+        SELECt is_request FROM TB_USER WHERE user_code = #{user_code}
+    </select>
+
+
     <select id="getUserList" resultType="Map">
         SELECT user_code, user_name, is_buttonOn FROM
             TB_USER;

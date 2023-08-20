@@ -34,4 +34,6 @@ public interface UserMapper {
     public List<Map<String,Object>> getUserByName(@Param("keyword") String keyword);
 
     public String getUserNameByCode(@Param("user_code") int user_code);
+
+    public int getIsRequest(@Param("user_code") int user_code);
 }

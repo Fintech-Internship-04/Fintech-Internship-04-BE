@@ -91,6 +91,10 @@ public class UserController {
 //        }
         return new ResponseEntity<List<Map<String,Object>>>(list,HttpStatus.OK);
     }
+    @GetMapping("/getIsRequest/{user_code}")
+    public int getIsRequest(@PathVariable int user_code){
+        return userService.getIsRequest(user_code);
+    }
 
     @GetMapping("/getIdByCode/{user_code}")
     public String getIdByCode(@PathVariable int user_code)
