@@ -45,6 +45,10 @@ public class GroupService {
         return groupMapper.getMemberListFromGroup(group_code);
     }
 
+
+    public String getGroupOwnerName( int group_code){
+        return groupMapper.getGroupOwnerName(group_code);
+    }
     public Map<String,Object> getNameAndDateFromGroup(int group_code){
         return groupMapper.getNameAndDateFromGroup(group_code);
     }

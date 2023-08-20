@@ -125,6 +125,7 @@ public class GroupController {
         List<Map<String,Object>> list = groupService.getMemberListFromGroup(group_code);
         String group_name = groupService.getNameFromGroup(group_code);
         LocalDateTime date = groupService.getDateFromGroup(group_code);
+        String owner_name = groupService.getGroupOwnerName(group_code);
         Map<String,Object> map = new HashMap<String,Object>();
         if(list==null)
         {
@@ -134,6 +135,7 @@ public class GroupController {
         System.out.println(list);
         map.put("group_name",group_name);
         map.put("createdAt",date);
+        map.put("owner_name", owner_name);
         map.put("user_list",list);
         return new ResponseEntity<Map<String,Object>>(map,HttpStatus.OK);
     }

@@ -38,6 +38,11 @@
         group_code = #{group_code}
     </select>
 
+    <select id="getGroupOwnerName" resultType="String">
+        SELECT DISTINCT(user_name) FROM TB_USER AS A INNER JOIN TB_GROUP AS B ON A.user_code = B.owner_code
+        WHERE B.group_code = #{group_code}
+    </select>
+
     <update id="disableInvite">
         UPDATE TB_USER SET is_invited = 0, invited_from = null
         WHERE user_code = #{user_code}

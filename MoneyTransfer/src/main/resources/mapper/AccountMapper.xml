@@ -61,9 +61,6 @@
         AND group_code = #{group_code}
     </select>
 
-    <select id="getGroupRequest" resultType="Map">
-        SELECT group_code, trans_amt FROM
-    </select>
 
     <update id="activateGroupPay">
         UPDATE TB_GROUP SET is_active = 1 WHERE group_code = #{group_code};
@@ -103,13 +100,6 @@
                                                          AND group_code = #{group_code}
     </update>
 
-    <update id="changeIsRespond" parameterMap="List">
-        UPDATE TB_GROUP_PAY_REQUEST SET is_respond = 1
-        WHERE user_code IN
-        <foreach collection="user_list" item="item" separator="," open="(" close=")">
-            #{item.user_code}
-        </foreach>
-    </update>
 
     <select id= "getGroupPaymentDetails" resultType="Map">
 

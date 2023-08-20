@@ -161,9 +161,6 @@ public class AccountService {
         accountMapper.enrollAccount(account);
     }
 
-    public void changeIsRespond( List<Map<String,Object>> userList){
-        accountMapper.changeIsRespond(userList);
-    }
 
 
 }

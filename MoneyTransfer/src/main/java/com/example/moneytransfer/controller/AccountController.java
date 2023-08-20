@@ -65,6 +65,8 @@ public class AccountController {
         return true;
     }
 
+
+
     @GetMapping("/getAccountList/{user_code}")
     public List<AccountDTO> getAccountList(@PathVariable Integer user_code)
     {
@@ -163,17 +165,6 @@ public class AccountController {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
-    }
-
-    @PostMapping("/changeIsRespond")
-    public boolean changeIsRespond(@RequestBody List<Map<String,Object>> user_list){
-        try{
-            accountService.changeIsRespond(user_list);
-            return true;
-        }catch(Exception e){
-            e.printStackTrace();
-            return false;
-        }
     }
 
     @PostMapping("/refuseGroupPay")

@@ -49,5 +49,7 @@ public interface GroupMapper {
     public Map<String,Object> getNameAndDateFromGroup(@Param("group_code") int group_code);
 
     public String getNameFromGroup(@Param("group_code") int group_code);
+
+    public String getGroupOwnerName(@Param("group_code") int group_code);
     public LocalDateTime getDateFromGroup(@Param("group_code") int group_code);
 }
