@@ -71,6 +71,12 @@ public class UserController {
     }
 
 
+
+    @GetMapping("/getUserNameByCode/{user_code}")
+    public String getUserNameByCode(int user_code) {
+        return userService.getUserNameByCode(user_code);
+    }
+
     @GetMapping("/getUserList")
     public ResponseEntity<List<Map<String,Object>>> getUserList(){
         List<Map<String,Object>> list = userService.getUserList();
@@ -122,9 +128,5 @@ public class UserController {
         return userService.getUserByName(keyword);
     }
 
-    @GetMapping("/getUserNameByCode/{user_code}")
-    public String getUserNameByCode(int user_code) {
-        return userService.getUserNameByCode(user_code);
-    }
 
 }

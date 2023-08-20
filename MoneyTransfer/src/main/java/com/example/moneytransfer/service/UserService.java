@@ -41,7 +41,6 @@ public class UserService {
     }
 
 
-
     public void editUserInfo(User user){
          userMapper.editUserInfo(user);
     }
