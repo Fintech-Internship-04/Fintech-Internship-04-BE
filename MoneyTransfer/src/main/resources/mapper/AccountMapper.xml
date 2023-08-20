@@ -29,7 +29,7 @@
     </insert>
     <select id = "getAccountCode" resultType="int">
 
-        SELECT account_code FROM TB_ACCOUNT WHERE user_code = #{user_code} AND
+        SELECT account_code, account_num FROM TB_ACCOUNT WHERE user_code = #{user_code} AND
                                                   priority = 1
     </select>
     <select id ="getBalance" resultType="int">

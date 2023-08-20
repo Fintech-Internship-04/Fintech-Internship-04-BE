@@ -23,9 +23,9 @@ public class GroupController {
 
     @Transactional
     @PostMapping("/createGroup")
-    public ResponseEntity<String> createGroup(@RequestBody Map<String, Object> request) {
-
-       try{
+    public ResponseEntity<Integer> createGroup(@RequestBody Map<String, Object> request) {
+        Integer group_code;
+        try{
            System.out.println(request);
 
            GroupCreateDTO groupRequest = new GroupCreateDTO();
@@ -43,7 +43,7 @@ public class GroupController {
 
 
            groupService.createGroup(groupRequest);
-           Integer group_code = groupRequest.getGroup_code();
+           group_code = groupRequest.getGroup_code();
            Integer user_code  = groupRequest.getOwner_code();
 
            System.out.println(group_code);
@@ -54,10 +54,10 @@ public class GroupController {
        }catch(Exception e)
        {
            e.printStackTrace();
-           return new ResponseEntity<String>("그룹 초대에 실패했습니다.",HttpStatus.BAD_REQUEST);
+           return new ResponseEntity<Integer>(0,HttpStatus.BAD_REQUEST);
        }
 
-        return new ResponseEntity<String>("그룹 초대 발송에 성공했습니다.",HttpStatus.OK);
+        return new ResponseEntity<Integer>(group_code,HttpStatus.OK);
     }
 
 

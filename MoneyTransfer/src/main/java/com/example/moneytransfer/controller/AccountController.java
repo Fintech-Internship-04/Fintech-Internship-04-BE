@@ -22,7 +22,9 @@ public class AccountController {
     AccountService accountService;
     @Autowired
     GroupService groupService;
-    
+
+
+    //Post 메서드 : 출금하기
     @PostMapping("/deposit")
     public boolean deposit(@RequestBody AccountPaymentDTO payment_detail)
     {
@@ -34,6 +36,7 @@ public class AccountController {
         }
     }
 
+    //Post 메서드 : 그룹 정산,
     @PostMapping("/groupDeposit")
     public boolean groupDeposit(@RequestBody AccountPaymentDTO payment_detail)
     {
@@ -199,6 +202,7 @@ public class AccountController {
             return new ResponseEntity<List<Map<String,Object>>>(list,HttpStatus.OK);
         }
     }
+
 
     @PostMapping("/enrollAccount")
     public ResponseEntity<Void> enrollAccount(@RequestBody AccountDTO account) {
